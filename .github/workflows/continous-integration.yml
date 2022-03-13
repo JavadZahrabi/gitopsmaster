@@ -30,7 +30,7 @@ jobs:
     - name: Build the Docker image 
       run: |
         cd application
-        sh ./mvnw spring-boot:build-image
+        sh ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=$DOCKER_USER/$REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}
       
     - name: Docker Login
       run: | 
@@ -38,5 +38,4 @@ jobs:
       
     - name: Docker Image Tagging and Push
       run: |
-        docker tag alehnert/gitops-evaluation-spring-boot-example $DOCKER_USER/$REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}
         docker push $DOCKER_USER/$REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}

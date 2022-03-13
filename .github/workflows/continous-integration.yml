@@ -30,9 +30,9 @@ jobs:
 
     - name: Build the Docker image 
       run: |
-        echo "Build Docker image $DOCKER_USER/$REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}"
+        echo "Build Docker image $DOCKER_USER/$DOCKER_REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}"
         cd application
-        sh ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=$DOCKER_USER/$REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}
+        sh ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=$DOCKER_USER/$DOCKER_REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}
       
     - name: Docker Login
       run: | 
@@ -40,5 +40,5 @@ jobs:
       
     - name: Docker Image Tagging and Push
       run: |
-        echo "Push image $DOCKER_USER/$REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}"
-        docker push $DOCKER_USER/$REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}
+        echo "Push image $DOCKER_USER/$DOCKER_REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}"
+        docker push $DOCKER_USER/$DOCKER_REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}

@@ -2,7 +2,7 @@ name: Continous Integration
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, feature/** ]
 
 env:
   DOCKER_USER: ${{secrets.DOCKER_USER}}
@@ -12,6 +12,7 @@ env:
 jobs:
   push-image-to-docker-hub:
     runs-on: ubuntu-latest
+    
     steps:
     - uses: actions/checkout@v2 
     

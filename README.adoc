@@ -37,10 +37,10 @@ sh ./mvnw spring-boot:run
 sh ./mvnw spring-boot:build-image
 ----
 
-Generated Docker Image name schema: `${docker.hub.organization}/${project.artifactId}`
+Generated Docker Image name schema: `${project.artifactId}`
 
-Use `$ sh ./mvnw spring-boot:build-image -D docker.hub.organization=my-organization`
-to change the Docker Hub Organization or username.
+Use `$ sh ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=my-organization/my-repository-name`
+to change the Image name.
 
 ==== Run Docker Container
 [source,bash]

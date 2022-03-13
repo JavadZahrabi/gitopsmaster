@@ -18,7 +18,6 @@
 
 	<properties>
 		<java.version>17</java.version>
-		<docker.hub.organization>alehnert</docker.hub.organization>
 	</properties>
 
 	<dependencies>
@@ -67,7 +66,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<imageName>${docker.hub.organization}/${project.artifactId}</imageName>
 					<excludeDevtools>true</excludeDevtools>
 					<environmentVariables>
 						<APPLICATION_VERSION>${project.version}</APPLICATION_VERSION>

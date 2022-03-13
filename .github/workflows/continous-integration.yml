@@ -25,10 +25,12 @@ jobs:
     - uses: actions/setup-java@v2
       with:
         distribution: 'temurin' # See 'Supported distributions' for available options https://github.com/actions/setup-java
-        java-version: '17'  
+        java-version: '17'
+        cache: 'maven'
 
     - name: Build the Docker image 
       run: |
+        echo "Build Docker image $DOCKER_USER/$REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}"
         cd application
         sh ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=$DOCKER_USER/$REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}
       
@@ -38,4 +40,5 @@ jobs:
       
     - name: Docker Image Tagging and Push
       run: |
+        echo "Push image $DOCKER_USER/$REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}"
         docker push $DOCKER_USER/$REPO_NAME:${{ steps.tagInfo.outputs.date }}-${{ steps.tagInfo.outputs.shaShort }}

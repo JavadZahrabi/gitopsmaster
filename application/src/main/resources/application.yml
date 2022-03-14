@@ -1,7 +1,3 @@
-spring:
-  profiles:
-    active: ${APPLICATION_ENVIRONMENT:LOCAL}
-
 ### Global configuration
 #
 # Valid for all environments
@@ -62,47 +58,10 @@ logging:
 
 ### Application configuration
 #
-# Valid for all environments
+#
 application:
   version-info:
     name: gitops-evaluation-spring-boot-example
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: LOCAL
-
-### Application configuration
-#
-# Valid for LOCAL
-application:
-  version-info:
-    environment: LOCAL
+    environment: ${APPLICATION_ENVIRONMENT}
     version: ${APPLICATION_VERSION:unknown}
 
----
-
-### Disable development tools on PROD
-#
-#
-spring:
-  config:
-    activate:
-      on-profile: PROD
-  devtools:
-    add-properties: false
-
-### Application configuration
-#
-# Valid for LOCAL
-application:
-  version-info:
-    environment: PROD
-    version: ${APPLICATION_VERSION:unknown}
-
-### Alternative: Application configuration
-#
-# Import PROD configuration from Kubernetes ConfigMap
-# import: 'configtree:/path/to/mounted/configmap'
